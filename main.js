@@ -22,6 +22,7 @@ async function handleSubmit(e) {
     let res = await fetch(`${api_url}user.status?handle=${username}`);
     res = await res.json();
 
+    // TODO: ALSO THIS LOOP IF FROM THE ACTUAL CF VIZ CODE BASE, WORKS FINE BUT LOOKS LIKE SOME OPTIMIZATIONS CAN BE DONE TO IT..
     for (var i = res.result.length - 1; i >= 0; i--) {
       var sub = res.result[i];
 

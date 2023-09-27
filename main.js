@@ -12,6 +12,7 @@ var heatmap = {};
 var heatmapData = {};
 var years = 0;
 
+// TODO: BREAK THIS FUNCTION INTO IDK.. MORE FUNCTIONS?
 async function handleSubmit(e) {
   e.preventDefault();
   try {

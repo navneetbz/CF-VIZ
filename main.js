@@ -190,8 +190,10 @@ async function handleSubmit(e) {
       unsolvedConElement.classList.remove("d-none")
 
       // Update content using vanilla JavaScript
-      var handleTextElement = document.querySelector(".handle-text")
-      handleTextElement.textContent = username
+      var handleTextElement = document.querySelectorAll(".handle-text")
+      handleTextElement.forEach((el) => {
+        el.textContent = username
+      })
 
       document.getElementById("tried").textContent = tried
       document.getElementById("solved").textContent = solved
@@ -215,18 +217,80 @@ async function handleSubmit(e) {
         solvedWithOneSub + " (" + (solved ? ((solvedWithOneSub / solved) * 100).toFixed(2) : 0) + "%)"
 
       var unsolvedListElement = document.getElementById("unsolvedList")
-      unsolved.forEach(function (p) {
+      unsolved.forEach(function (p, index) {
         var url = get_url(p)
         var span = document.createElement("span")
-        span.classList.add("m-1")
+        span.classList.add("m-1", "badge", "rounded-pill", "text-bg-light", "fs-6")
+
         var link = document.createElement("a")
         link.href = url
         link.target = "_blank"
-        link.className = "lnk"
+
+        link.classList.add("lnk")
         link.textContent = p
+
         span.appendChild(link)
         unsolvedListElement.appendChild(span)
       })
+
+      const response1 = await fetch(api_url + "user.rating?handle=" + username)
+
+      if (!response1.ok) {
+        throw new Error("Failed to fetch user info")
+      }
+
+      const data1 = await response1.json()
+
+      if (data1.result.length < 1) {
+        err_message("handleDiv", "No contests")
+        return
+      }
+
+      let best = 1e10
+      let worst = -1e10
+      let maxUp = 0
+      let maxDown = 0
+      let bestCon = ""
+      let worstCon = ""
+      let maxUpCon = ""
+      let maxDownCon = ""
+      let tot = data1.result.length
+
+      data1.result.forEach(function (con) {
+        // con is a contest
+        if (con.rank < best) {
+          best = con.rank
+          bestCon = con.contestId
+        }
+        if (con.rank > worst) {
+          worst = con.rank
+          worstCon = con.contestId
+        }
+        const ch = con.newRating - con.oldRating
+        if (ch > maxUp) {
+          maxUp = ch
+          maxUpCon = con.contestId
+        }
+        if (ch < maxDown) {
+          maxDown = ch
+          maxDownCon = con.contestId
+        }
+      })
+
+      // Showing the rating change data in proper places
+      const con_url = "https://codeforces.com/contest/"
+      document.getElementById("contests").classList.remove("d-none")
+      document.querySelector(".handle-text").textContent = username
+      document.getElementById("contestCount").textContent = tot
+      document.getElementById("best").innerHTML =
+        best + '<a href="' + con_url + bestCon + '" target="_blank"> (' + bestCon + ") </a>"
+      document.getElementById("worst").innerHTML =
+        worst + '<a href="' + con_url + worstCon + '" target="_blank"> (' + worstCon + ") </a>"
+      document.getElementById("maxUp").innerHTML =
+        maxUp + '<a href="' + con_url + maxUpCon + '" target="_blank"> (' + maxUpCon + ") </a>"
+      document.getElementById("maxDown").innerHTML = maxDown
+        ? maxDown + '<a href="' + con_url + maxDownCon + '" target="_blank"> (' + maxDownCon + ") </a>"
+        : "---"
 
       console.log(
         "verdict",

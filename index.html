@@ -18,21 +18,6 @@
             font-family: Menlo
         }
 
-        .heatMapContainer {
-            margin: 0 auto;
-            /* Center horizontally */
-            text-align: center;
-            /* Center text inside container */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /* Center vertically */
-            width: 80%;
-            /* Adjust the width as needed */
-            height: 400px;
-            /* Adjust the height as needed */
-        }
-
         .form-container {
             display: flex;
             align-items: center;
@@ -41,6 +26,24 @@
 
         #form {
             width: 40%;
+        }
+
+        /* Define column layout for Bootstrap */
+        .mdl-cell {
+            flex: 1;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        /* Define specific column sizes */
+        .mdl-cell--8-col {
+            flex-basis: 66.66%;
+            max-width: 66.66%;
+        }
+
+        .mdl-cell--11-col-desktop {
+            flex-basis: 91.66%;
+            max-width: 91.66%;
         }
 
 
@@ -60,7 +63,7 @@
         </div>
     </nav>
 
-    <div class="container mt-3">
+    <div class="container-sm mt-3">
 
         <div class="form-container">
             <form id="form">
@@ -110,8 +113,8 @@
 
         <div class="row mt-3">
             <div class="col-sm">
-                <div id='numbers' class="card shadow-sm p-3 mb-5 bg-white rounded d-none">
-                    <table class="table">
+                <div id='numbers' class="card shadow-sm p-3 bg-white rounded d-none">
+                    <table class="table table-hover">
                         <thead class="bg-teal text-white">
                             <tr>
                                 <th class="text-left">Some numbers about</th>
@@ -149,8 +152,8 @@
                 </div>
             </div>
             <div class="col-sm">
-                <!-- <div id="contests" class="card shadow-sm p-3 mb-5 bg-white rounded col-md-4 col-12">
-                    <table class="table">
+                <div id="contests" class="card shadow-sm p-3 bg-white rounded d-none">
+                    <table class="table table-hover">
                         <thead class="bg-teal text-white">
                             <tr>
                                 <th class="text-left">Contests of</th>
@@ -180,27 +183,24 @@
                             </tr>
                         </tbody>
                     </table>
-                </div> -->
+                </div>
             </div>
         </div>
 
 
-        <div class="row mt-3">
-            <div class="col-sm">
-                <div id="unsolvedCon" class="card shadow-sm p-3 mb-5 bg-white rounded col-md-8 col-12 d-none">
-                    <span id="unsolvedTitle">Unsolved</span>
-                    <div class="vertical-space"></div>
-                    <div class="to-clear" id="unsolvedList"></div>
-                </div>
+        <div class="mt-3 d-flex align-items-center justify-content-center">
+            <div id="unsolvedCon" class="card shadow-sm p-3 mb-5 bg-white rounded col-md-8 col-12 d-none">
+                <span id="unsolvedTitle" class=" fs-6 fw-bold">Unsolved</span>
+                <div class="vertical-space"></div>
+                <div class="to-clear" id="unsolvedList"></div>
             </div>
-
         </div>
 
 
         <div id="heatMapContainer"
-            class="d-none row mt-3 d-flex align-items-center justify-content-center card shadow-sm">
+            class="d-none row mt-3 d-flex align-items-center justify-content-center card shadow-sm md1-cell md1-cell--8-col md1-cell--11-col-desktop">
             <div id="heatmapTitle" class="mt-3 fw-bold">Submissions Heat Map of <span id="heatMapHandle"></span></div>
-            <div id="heatmap" class="overflow-x-auto heatMapContainer">
+            <div id="heatmap" class="overflow-x-auto">
             </div>
         </div>
     </div>

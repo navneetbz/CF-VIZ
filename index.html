@@ -14,7 +14,11 @@
 
 
     <style>
-        .chartContainer {
+        body {
+            font-family: Menlo
+        }
+
+        .heatMapContainer {
             margin: 0 auto;
             /* Center horizontally */
             text-align: center;
@@ -28,27 +32,46 @@
             height: 400px;
             /* Adjust the height as needed */
         }
+
+        .form-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #form {
+            width: 40%;
+        }
+
+
+        @media screen and (max-width: 770px) {
+            #form {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 
 <body>
 
     <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-            <button id="themeButton" onclick="setTheme()" type="button" class="btn btn-outline-primary"><i
-                    class="fas fa-moon fa-lg fa-fw"></i></button>
-
+        <div class="container-fluid fs-5 fw-bold">
+            CodeForce Viz
         </div>
     </nav>
 
     <div class="container mt-3">
-        <form id="form">
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">@</span>
-                <input type="text" class="form-control" placeholder="Username" name="username" id="username-input"
-                    aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-        </form>
+
+        <div class="form-container">
+            <form id="form">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                    <input type="text" class="form-control" placeholder="Username" name="username" id="username-input"
+                        aria-label="Username" aria-describedby="basic-addon1">
+                    <div id="username-input-Err"></div>
+                </div>
+            </form>
+        </div>
 
 
         <div id="loader" class="text-center mt-5">
@@ -58,40 +81,134 @@
         </div>
 
         <!-- NEED TO ADD ALL THE CHARTS HERE AND ALSO LOADING STATE.. -->
-        <div class="row w-100">
-            <div class="col w-50">
-                <div id="verdicts" class="d-none shadow">
+        <div class="row">
+            <div class="col-sm">
+                <div id="verdicts" class="d-none shadow-sm">
                 </div>
             </div>
-            <div class="col w-50">
-                <div id="langs" class="d-none shadow">
-                </div>
-            </div>
-        </div>
-        <div class="row w-100 mt-3">
-            <div class="col w-100 ">
-                <div id="tags" class="d-none card shadow overflow-x-auto">
+            <div class="col-sm">
+                <div id="langs" class="d-none shadow-sm">
                 </div>
             </div>
         </div>
-        <div class="row w-100 mt-3">
-            <div class="col w-50">
-                <div id="levels" class="d-none card shadow overflow-x-auto">
-                </div>
-            </div>
-            <div class="col w-50 ">
-                <div id="ratings" class="d-none card shadow overflow-x-auto">
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <div id="tags" class="d-none card shadow-sm overflow-x-auto">
                 </div>
             </div>
         </div>
-        <div id="chartContainer" class="d-none row w-100 mt-3 d-flex align-items-center justify-content-center card shadow">
-            <div id="heatmapTitle" class="mt-3">Submissions Heat Map of <span id="heatMapHandle"></span></div>
-            <div id="heatmap" class="overflow-x-auto chartContainer">
+        <div class="row mt-3">
+            <div class="col-sm-12 mb-3">
+                <div id="levels" class="d-none card shadow-sm overflow-x-auto">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div id="ratings" class="d-none card shadow-sm overflow-x-auto">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-sm">
+                <div id='numbers' class="card shadow-sm p-3 mb-5 bg-white rounded d-none">
+                    <table class="table">
+                        <thead class="bg-teal text-white">
+                            <tr>
+                                <th class="text-left">Some numbers about</th>
+                                <th class="handle-text"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-left">Tried</td>
+                                <td id="tried"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Solved</td>
+                                <td id="solved"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Average attempts</td>
+                                <td id="averageAttempt"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Max attempts</td>
+                                <td id="maxAttempt"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Solved with one submission</td>
+                                <td id="solvedWithOneSub"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Max AC(s)</td>
+                                <td id="maxAc"></td>
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm">
+                <!-- <div id="contests" class="card shadow-sm p-3 mb-5 bg-white rounded col-md-4 col-12">
+                    <table class="table">
+                        <thead class="bg-teal text-white">
+                            <tr>
+                                <th class="text-left">Contests of</th>
+                                <th class="handle-text"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-left">Number of contests</td>
+                                <td id="contestCount"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Best rank</td>
+                                <td id="best"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Worst rank</td>
+                                <td id="worst"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Max up</td>
+                                <td id="maxUp"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Max down</td>
+                                <td id="maxDown"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> -->
+            </div>
+        </div>
+
+
+        <div class="row mt-3">
+            <div class="col-sm">
+                <div id="unsolvedCon" class="card shadow-sm p-3 mb-5 bg-white rounded col-md-8 col-12 d-none">
+                    <span id="unsolvedTitle">Unsolved</span>
+                    <div class="vertical-space"></div>
+                    <div class="to-clear" id="unsolvedList"></div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div id="heatMapContainer"
+            class="d-none row mt-3 d-flex align-items-center justify-content-center card shadow-sm">
+            <div id="heatmapTitle" class="mt-3 fw-bold">Submissions Heat Map of <span id="heatMapHandle"></span></div>
+            <div id="heatmap" class="overflow-x-auto heatMapContainer">
             </div>
         </div>
     </div>
 
-
+    <!-- Error Message Display -->
+    <div id="errorAlert" class="alert alert-danger d-none">
+        <!-- Error message will be displayed here -->
+    </div>
 
 
     <script src="./main.js"> </script>
@@ -101,7 +218,9 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         // Load the Visualization API and the corechart package.
-        google.charts.load('current', { 'packages': ['corechart', 'calendar'] });
+        google.charts.load("current", {
+            packages: ["corechart", "calendar"],
+        })
     </script>
 
 </body>

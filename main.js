@@ -13,6 +13,9 @@ var heatmap = {};
 var heatmapData = {};
 var years = 0;
 
+const loader = document.getElementById("loader")
+loader.style.display = "none"
+
 var titleTextStyle = {
   fontSize: 18,
   color: "#393939",
@@ -22,6 +25,7 @@ var titleTextStyle = {
 // TODO: BREAK THIS FUNCTION INTO IDK.. MORE FUNCTIONS?
 async function handleSubmit(e) {
   e.preventDefault();
+  loader.style.display = "block"
   username = "";
   verdicts = {};
   langs = {};
@@ -169,6 +173,7 @@ async function handleSubmit(e) {
     console.error(err);
   } finally {
     // resetForm();
+    loader.style.display = "none"
   }
   console.log("RUNNING");
 }
@@ -443,10 +448,9 @@ function drawProblemRatingsChart() {
 
 function drawHeatmap() {
   const heatMapDiv = document.getElementById("heatmap");
+  const chartContainerDiv = document.getElementById("chartContainer")
   const heatMapHandleSpan = document.getElementById("heatMapHandle")
-  const heatmapTitleDiv = document.getElementById("heatmapTitle")
-  heatmapTitleDiv.classList.remove("d-none")
-  heatMapDiv.classList.remove("d-none");
+  chartContainerDiv.classList.remove("d-none");
   heatMapHandleSpan.innerHTML = username;
   var heatmapTable = [];
   for (var d in heatmap) {

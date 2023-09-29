@@ -596,7 +596,7 @@ function drawHeatmap() {
   heatmap = new google.visualization.Calendar(heatMapDiv)
   var heatmapOptions = {
     height: years * 140 + 30,
-    width: Math.max(heatMapDiv.getBoundingClientRect().width, 900),
+    width: Math.max(heatMapContainerDiv.getBoundingClientRect().width, 900),
     fontName: "Menlo",
     backgroundColor: "white",
     titleTextStyle: { color: "#212529", fontSize: "16" },
@@ -607,7 +607,7 @@ function drawHeatmap() {
     },
     colorAxis: {
       minValue: 0,
-      colors: ["#FEF5E7", "#F8C471", "#B9770E"],
+      colors: ["#216e39", "#30a14e", "#9be9a8"],
     },
     calendar: {
       cellSize: 15,

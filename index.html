@@ -28,29 +28,23 @@
             width: 40%;
         }
 
-        /* Define column layout for Bootstrap */
-        .mdl-cell {
-            flex: 1;
-            padding: 15px;
-            box-sizing: border-box;
+        #heatmap {
+            width: 100%;
         }
 
-        /* Define specific column sizes */
-        .mdl-cell--8-col {
-            flex-basis: 66.66%;
-            max-width: 66.66%;
+        #heatMapContainer {
+            width: 70%;
         }
-
-        .mdl-cell--11-col-desktop {
-            flex-basis: 91.66%;
-            max-width: 91.66%;
-        }
-
 
         @media screen and (max-width: 770px) {
             #form {
                 width: 100%;
             }
+
+            #heatMapContainer {
+                width: 95%;
+            }
+
         }
     </style>
 </head>
@@ -63,7 +57,7 @@
         </div>
     </nav>
 
-    <div class="container-sm mt-3">
+    <div class="container-lg mt-3">
 
         <div class="form-container">
             <form id="form">
@@ -86,34 +80,34 @@
         <!-- NEED TO ADD ALL THE CHARTS HERE AND ALSO LOADING STATE.. -->
         <div class="row">
             <div class="col-sm">
-                <div id="verdicts" class="d-none shadow-sm">
+                <div id="verdicts" class="d-none">
                 </div>
             </div>
             <div class="col-sm">
-                <div id="langs" class="d-none shadow-sm">
+                <div id="langs" class="d-none">
                 </div>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-sm-12">
-                <div id="tags" class="d-none card shadow-sm overflow-x-auto">
+                <div id="tags" class="d-none card overflow-x-auto">
                 </div>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-sm-12 mb-3">
-                <div id="levels" class="d-none card shadow-sm overflow-x-auto">
+                <div id="levels" class="d-none card overflow-x-auto">
                 </div>
             </div>
             <div class="col-sm-12">
-                <div id="ratings" class="d-none card shadow-sm overflow-x-auto">
+                <div id="ratings" class="d-none card overflow-x-auto">
                 </div>
             </div>
         </div>
 
         <div class="row mt-3">
             <div class="col-sm">
-                <div id='numbers' class="card shadow-sm p-3 bg-white rounded d-none">
+                <div id='numbers' class="card p-3 bg-white rounded d-none">
                     <table class="table table-hover">
                         <thead class="bg-teal text-white">
                             <tr>
@@ -152,7 +146,7 @@
                 </div>
             </div>
             <div class="col-sm">
-                <div id="contests" class="card shadow-sm p-3 bg-white rounded d-none">
+                <div id="contests" class="card p-3 bg-white rounded d-none">
                     <table class="table table-hover">
                         <thead class="bg-teal text-white">
                             <tr>
@@ -189,18 +183,20 @@
 
 
         <div class="mt-3 d-flex align-items-center justify-content-center">
-            <div id="unsolvedCon" class="card shadow-sm p-3 mb-5 bg-white rounded col-md-8 col-12 d-none">
+            <div id="unsolvedCon" class="card p-3 mb-5 bg-white rounded col-md-8 col-12 d-none">
                 <span id="unsolvedTitle" class=" fs-6 fw-bold">Unsolved</span>
                 <div class="vertical-space"></div>
                 <div class="to-clear" id="unsolvedList"></div>
             </div>
         </div>
 
+        <div class="d-flex justify-content-center align-items-center">
 
-        <div id="heatMapContainer"
-            class="d-none row mt-3 d-flex align-items-center justify-content-center card shadow-sm md1-cell md1-cell--8-col md1-cell--11-col-desktop">
-            <div id="heatmapTitle" class="mt-3 fw-bold">Submissions Heat Map of <span id="heatMapHandle"></span></div>
-            <div id="heatmap" class="overflow-x-auto">
+            <div id="heatMapContainer" class="d-none mt-3 d-flex align-items-center justify-content-center card">
+                <div id="heatmapTitle" class="mt-3 fw-bold">Submissions Heat Map of <span id="heatMapHandle"></span>
+                </div>
+                <div id="heatmap" class="overflow-x-auto">
+                </div>
             </div>
         </div>
     </div>

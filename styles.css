@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Menlo
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .8rem;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+}
+
+.tags-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.col {
+    flex: 1;
+    margin: 0px auto
+}
+
+.container {
+    width: 70%;
+    margin: 0 auto;
+    /* Center the container horizontally */
+    padding: .5rem;
+    /* Add some padding inside the container */
+    background-color: white;
+    /* Background color for the container */
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    /* Add a shadow effect */
+    border-radius: 8px;
+    /* Rounded corners for the container */
+}
+
+input {
+    width: 200px;
+    /* Set the width of the input box */
+    height: 30px;
+    /* Set the height of the input box */
+    background-color: #f0f0f0;
+    /* Set the background color */
+    color: #333;
+    /* Set the text color */
+    border: 1px solid #ccc;
+    /* Add a 1px solid gray border */
+    font-size: 16px;
+    /* Set the font size */
+    padding: 5px;
+    /* Add 8px of padding on all sides */
+    border-radius: 5px;
+}
+
+input:focus {
+    border: 1px solid #007bff;
+    background-color: white;
+}
+
+.d-none {
+    display: none;
+}
+
+.form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#heatmap {
+    width: 100%;
+}
+
+#heatMapContainer {
+    width: 70%;
+}
+
+#loader {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    /* Set container height to 100% of the viewport height */
+    text-align: center;
+    /* Center horizontally */
+}
+
+#loader>img {
+    position: absolute;
+    top: 50%;
+    /* Move the top edge of the image to the vertical center */
+    left: 50%;
+    /* Move the left edge of the image to the horizontal center */
+    transform: translate(-50%, -50%);
+    /* Center the image precisely */
+}
+
+#tags {
+    overflow: auto;
+    margin-inline: auto;
+    width: 100%;
+}
+
+@media screen and (max-width: 770px) {
+    #form {
+        width: 100%;
+    }
+
+    #heatMapContainer {
+        width: 95%;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+}

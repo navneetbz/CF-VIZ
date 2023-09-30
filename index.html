@@ -6,108 +6,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CF VIZ</title>
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
-
-    <style>
-        body {
-            font-family: Menlo
-        }
-
-        .form-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #form {
-            width: 40%;
-        }
-
-        #heatmap {
-            width: 100%;
-        }
-
-        #heatMapContainer {
-            width: 70%;
-        }
-
-        @media screen and (max-width: 770px) {
-            #form {
-                width: 100%;
-            }
-
-            #heatMapContainer {
-                width: 95%;
-            }
-
-        }
-    </style>
 </head>
 
 <body>
 
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid fs-5 fw-bold">
+    <nav class="navbar">
+        <div style="font-weight: bold;">
             CodeForce Viz
         </div>
     </nav>
 
-    <div class="container-lg mt-3">
 
-        <div class="form-container">
-            <form id="form">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">@</span>
-                    <input type="text" class="form-control" placeholder="Username" name="username" id="username-input"
-                        aria-label="Username" aria-describedby="basic-addon1">
-                    <div id="username-input-Err"></div>
-                </div>
-            </form>
-        </div>
-
-
-        <div id="loader" class="text-center mt-5">
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
+    <div class="form-container">
+        <form id="form" style="width: 100%;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 5px;">
+                <span>@</span>
+                <input type="text" placeholder="Username" name="username" id="username-input" aria-label="Username"
+                    aria-describedby="basic-addon1">
             </div>
+    </div>
+    </form>
+
+    <div class="container d-none">
+
+        <div id="loader">
+            <img src="./loader.gif" alt="Loading Tom" height="200px" width="200px">
         </div>
 
         <!-- NEED TO ADD ALL THE CHARTS HERE AND ALSO LOADING STATE.. -->
         <div class="row">
-            <div class="col-sm">
-                <div id="verdicts" class="d-none">
+            <div class="col">
+                <div id="verdicts" style="width: 100%;overflow: auto;" class="d-none">
                 </div>
             </div>
-            <div class="col-sm">
-                <div id="langs" class="d-none">
-                </div>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-sm-12">
-                <div id="tags" class="d-none card overflow-x-auto">
+            <div class="col">
+                <div id="langs" style="width: 100%; overflow: auto;" class="d-none">
                 </div>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col-sm-12 mb-3">
-                <div id="levels" class="d-none card overflow-x-auto">
+
+        <div class="tags-container">
+            <div id="tags" class="d-none">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col mb-3">
+                <div id="levels" class="d-none  overflow-x-auto">
                 </div>
             </div>
-            <div class="col-sm-12">
-                <div id="ratings" class="d-none card overflow-x-auto">
+            <div class="col">
+                <div id="ratings" class="d-none  overflow-x-auto">
                 </div>
             </div>
         </div>
 
         <div class="row mt-3">
-            <div class="col-sm">
-                <div id='numbers' class="card p-3 bg-white rounded d-none">
+            <div class="col">
+                <div id='numbers' class="p-3 bg-white rounded d-none">
                     <table class="table table-hover">
                         <thead class="bg-teal text-white">
                             <tr>
@@ -145,8 +101,8 @@
                     </table>
                 </div>
             </div>
-            <div class="col-sm">
-                <div id="contests" class="card p-3 bg-white rounded d-none">
+            <div class="col">
+                <div id="contests" class=" p-3 bg-white rounded d-none">
                     <table class="table table-hover">
                         <thead class="bg-teal text-white">
                             <tr>
@@ -183,7 +139,7 @@
 
 
         <div class="mt-3 d-flex align-items-center justify-content-center">
-            <div id="unsolvedCon" class="card p-3 mb-5 bg-white rounded col-md-8 col-12 d-none">
+            <div id="unsolvedCon" class=" p-3 mb-5 bg-white rounded col d-none">
                 <span id="unsolvedTitle" class=" fs-6 fw-bold">Unsolved</span>
                 <div class="vertical-space"></div>
                 <div class="to-clear" id="unsolvedList"></div>
@@ -192,7 +148,7 @@
 
         <div class="d-flex justify-content-center align-items-center">
 
-            <div id="heatMapContainer" class="d-none mt-3 d-flex align-items-center justify-content-center card">
+            <div id="heatMapContainer" class="d-none mt-3 d-flex align-items-center justify-content-center ">
                 <div id="heatmapTitle" class="mt-3 fw-bold">Submissions Heat Map of <span id="heatMapHandle"></span>
                 </div>
                 <div id="heatmap" class="overflow-x-auto">
@@ -201,11 +157,7 @@
         </div>
     </div>
 
-    <!-- Error Message Display -->
-    <div id="errorAlert" class="alert alert-danger d-none">
-        <!-- Error message will be displayed here -->
     </div>
-
 
     <script src="./main.js"> </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

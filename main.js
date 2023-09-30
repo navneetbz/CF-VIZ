@@ -36,12 +36,15 @@ var titleTextStyle = {
 // Get the form element by its ID
 const form = document.getElementById("form")
 
+const container = document.querySelector(".container")
+
 const input = document.getElementById("username-input")
 
 // TODO: BREAK THIS FUNCTION INTO IDK.. MORE FUNCTIONS?
 async function handleSubmit(e) {
   e.preventDefault()
   loader.style.display = "block"
+  container.classList.remove("d-none")
   username = ""
   verdicts = {}
   langs = {}
@@ -292,28 +295,6 @@ async function handleSubmit(e) {
         ? maxDown + '<a href="' + con_url + maxDownCon + '" target="_blank"> (' + maxDownCon + ") </a>"
         : "---"
 
-      console.log(
-        "verdict",
-        verdicts,
-        "langs",
-        langs,
-        "tags",
-        tags,
-        " levels",
-        levels,
-        "ratings",
-        ratings,
-        "problems",
-        problems,
-        "totalSub",
-        totalSub,
-        "heatmap",
-        heatmap,
-        "heatmapData",
-        heatmapData,
-        "years",
-        years
-      )
     } else {
       throw Error("User not found!")
     }
@@ -607,7 +588,7 @@ function drawHeatmap() {
     },
     colorAxis: {
       minValue: 0,
-      colors: ["#216e39", "#30a14e", "#9be9a8"],
+      colors: ["#9be9a8", "#30a14e", "#216e39"],
     },
     calendar: {
       cellSize: 15,
